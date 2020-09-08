@@ -28,11 +28,14 @@ func main() {
 
 	ages := []int{35, 15, 25}
 	red, green := ages[0:1], ages[1:3]
+	new := ages[0:1]
 
 	s.Show("ages", ages)
 	s.Show("red", red)
 	s.Show("green", green)
-
+	s.Show("new1", new)
+	new = new[0:cap(new)]
+	s.Show("new2", new)
 	fmt.Println(red[0])
 	// fmt.Println(red[1]) // error
 	// fmt.Println(red[2]) // error

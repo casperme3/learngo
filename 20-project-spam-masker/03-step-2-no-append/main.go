@@ -15,7 +15,7 @@
 ✅ #6- Stop masking when whitespace is detected
 ✅ #7- Put a http:// prefix in front of the masked link
 */
-
+// THIS Project is OK.. I undertand it by heart!
 package main
 
 import (
@@ -51,7 +51,8 @@ func main() {
 		// it's already there
 		if len(text[i:]) >= nlink && text[i:i+nlink] == link {
 			in = true
-			i += nlink
+			i += nlink - 1
+			continue
 		}
 
 		switch text[i] {

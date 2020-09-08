@@ -12,6 +12,7 @@ import (
 	"fmt"
 	"runtime"
 	"runtime/debug"
+	"unsafe"
 )
 
 // ---------------------------------------------------------
@@ -86,28 +87,39 @@ func main() {
 	// 1. allocate an array with 10 million int elements
 	//    the array's size will be equal to ~80MB
 	//    hint: use the `size` constant above.
-
+	var arr1 [size]int
 	// 2. print the memory usage (use the report func).
-
+	report("> declare arr1 [size]int:")
 	// 3. copy the array to a new array.
-
+	arr2 := arr1
 	// 4. print the memory usage
-
+	report("> declare arr2 from arr1:")
 	// 5. pass the array to the passArray function
-
+	passArray(arr1)
 	// 6. convert one of the arrays to a slice
-
+	slice1 := arr1[:]
+	report("> declaring a slice1:")
 	// 7. slice only the first 1000 elements of the array
-
+	slice2 := arr1[:1e3]
+	report("> declaring a slice2:")
 	// 8. slice only the elements of the array between 1000 and 10000
-
+	slice3 := arr1[1e3:1e4]
 	// 9. print the memory usage (report func)
-
+	report("> declaring a slice3:")
 	// 10. pass the one of the slices to the passSlice function
-
+	passSlice(slice1)
 	// 11. print the sizes of the arrays and slices
 	//     hint: use the unsafe.Sizeof function
 	//     see more here: https://golang.org/pkg/unsafe/#Sizeof
+
+	fmt.Println()
+	fmt.Printf("Arr1 size: %d bytes\n", unsafe.Sizeof(arr1))
+	fmt.Printf("Arr2 size: %d bytes\n", unsafe.Sizeof(arr2))
+	fmt.Printf("Slice1 size: %d bytes\n", unsafe.Sizeof(slice1))
+	fmt.Printf("Slice2 size: %d bytes\n", unsafe.Sizeof(slice2))
+	fmt.Printf("Slice3 size: %d bytes\n", unsafe.Sizeof(slice3))
+
+	_, _, _ = arr2, slice2, slice3
 }
 
 // passes [size]int array — about 80MB!

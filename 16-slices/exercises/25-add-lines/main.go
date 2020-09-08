@@ -72,13 +72,42 @@ import (
 func main() {
 	// You need to add a newline after each sentence in another slice.
 	// Don't touch the following code.
-	lyric := strings.Fields(`yesterday all my troubles seemed so far away now it looks as though they are here to stay oh i believe in yesterday`)
+	lyric := strings.Fields(`yesterday all my troubles seemed so far away now it looks as though they are here to stay oh i believe in yesterday that's just for yesterday yeahh ohhh haaahhh! yeah wadda pack is this song`)
 
+	// 0										  7		8
+	// yesterday all my troubles seemed so far away
+	// 9										 18  	19
+	// now it looks as though they are here to stay
+	// 20				   24		 25
+	// oh i believe in yesterday
+	// 26									32			33
+	// that's just for yesterday yeahh ohhh haaahhh!
+	// 34				    	 39  40
+	// yeah wadda pack is this song
 	// ===================================
 	//
 	// ~~~ CHANGE THIS CODE ~~~
 	//
-	fix := lyric
+	fix := make([]string, len(lyric)+5)
+
+	cutpoint := [...]int{8, 18, 23, 30, 36}
+	for i, n := 0, 0; n < len(lyric); i++ {
+		n += copy(fix[n+i:], lyric[n:cutpoint[i]])
+
+		fix[n+i] = "\n"
+		fmt.Printf("%d\n", n)
+		// if i > 1 {
+		// 	break
+		// }
+	}
+
+	//TODO: use a loop instead dammit!!!!
+	// copy(fix, lyric[:8])
+	// fix[8] = "\n"
+	// copy(fix[9:19], lyric[8:18])
+	// fix[19] = "\n"
+	// copy(fix[20:25], lyric[18:23])
+	// fix[25] = "\n"
 	//
 	// ===================================
 

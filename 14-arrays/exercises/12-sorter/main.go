@@ -8,6 +8,12 @@
 
 package main
 
+import (
+	"fmt"
+	"os"
+	"strconv"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Number Sorter
 //
@@ -45,6 +51,35 @@ package main
 //   go run main.go 5 4 a c 1
 //     [0 0 1 4 5]
 // ---------------------------------------------------------
+const maxVal = 5
 
 func main() {
+	args := os.Args[1:]
+	l := len(args)
+	if l == 0 {
+		fmt.Println("Give me a number.")
+		return
+	} else if l > maxVal {
+		fmt.Println("I could only support 5 numbers.")
+		return
+	}
+
+	var numbers [maxVal]float64
+
+	for i, v := range args {
+		if num, err := strconv.ParseFloat(v, 64); err == nil {
+			numbers[i] = num
+		}
+	}
+	fmt.Printf("Original: %g\n", numbers)
+
+	for i := 0; i < maxVal-1; i++ {
+		for j := 0; j < maxVal-i-1; j++ {
+			if numbers[j] > numbers[j+1] {
+				numbers[j], numbers[j+1] = numbers[j+1], numbers[j]
+			}
+		}
+	}
+
+	fmt.Printf("Sorted: %g\n", numbers)
 }

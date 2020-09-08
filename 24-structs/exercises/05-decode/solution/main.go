@@ -21,13 +21,13 @@ const data = `
 [
         {
                 "id": 1,
-                "name": "god of war",
+                "name": "god of warsss",
                 "genre": "action adventure",
                 "price": 50
         },
         {
                 "id": 2,
-                "name": "x-com 2",
+                "name": "x-com 222",
                 "genre": "strategy",
                 "price": 40
         },

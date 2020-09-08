@@ -36,7 +36,9 @@ Gezegenin maymun soyundan gelen canlıları öyle ilkeldir ki dijital kol saatin
 	//   but it gives you the position of the current rune
 	//   instead of its size.
 
-	// for _, r := range text {}
+	// for _, r := range text {
+	// 	fmt.Printf("%c", r)
+	// }
 	for i := 0; i < len(text); {
 		r, size := utf8.DecodeRuneInString(text[i:])
 		fmt.Printf("%c", r)

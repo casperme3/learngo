@@ -32,6 +32,7 @@ func main() {
 
 	var ok string
 	for i, game := range games {
+		// fmt.Println(">> ", i)
 		if game != newGames[i] {
 			ok = "not "
 			break

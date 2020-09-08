@@ -8,6 +8,8 @@
 
 package main
 
+import "fmt"
+
 // ---------------------------------------------------------
 // EXERCISE: Populate and Lookup
 //
@@ -70,4 +72,31 @@ package main
 // ---------------------------------------------------------
 
 func main() {
+	phones := map[string]string{}
+	phones["bowen"] = "202-555-0179"
+	phones["dulin"] = "03.37.77.63.06"
+	phones["greco"] = "03489940240"
+
+	products := map[int]bool{
+		617841573: true,
+		879401371: false,
+		576872813: true,
+	}
+
+	nphones := map[string][]string{
+		"bowen": {"202-555-0179"},
+		"dulin": {"03.37.77.63.06", "03.37.70.50.05", "02.20.40.10.04"},
+		"greco": {"03489940240", "03489900120"},
+	}
+
+	shop := map[int]map[int]int{
+		100: {617841573: 4, 576872813: 2},
+		101: {576872813: 5, 657473833: 20},
+		102: {},
+	}
+
+	fmt.Printf("Dulin's num: %q\n", phones["dulin"])
+	fmt.Printf("Product 879401371 available?: %v\n", products[879401371])
+	fmt.Printf("Greco's 2nd number is: %q\n", nphones["greco"][1])
+	fmt.Printf("Customer 101 bought 576872813 of quantity: %d\n", shop[10][576872813])
 }

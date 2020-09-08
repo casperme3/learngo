@@ -110,7 +110,10 @@ func main() {
 	// -----------------------------------------------------
 	// ✪ ONLY CHANGE THE CODE IN THIS AREA ✪
 
-	last10 := millions[len(millions)-10:]
+	// last10 := millions[len(millions)-10:]
+	last10 := make([]int, 10)
+	copy(last10, millions[len(millions)-10:])
+	millions = append([]int(nil), 0)
 
 	fmt.Printf("\nLast 10 elements: %d\n\n", last10)
 

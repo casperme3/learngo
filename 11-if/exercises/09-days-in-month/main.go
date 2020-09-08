@@ -8,6 +8,12 @@
 
 package main
 
+import (
+	"fmt"
+	"os"
+	"strings"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Days in a Month
 //
@@ -88,4 +94,31 @@ package main
 // ---------------------------------------------------------
 
 func main() {
+
+	if len(os.Args) != 2 {
+		fmt.Println("Give me a month")
+		return
+	}
+	args := os.Args[1]
+	m := strings.ToLower(args)
+	// year := time.Now().Year()
+	year := 2019
+
+	if m == "january" || m == "march" ||
+		m == "may" || m == "july" ||
+		m == "august" || m == "october" ||
+		m == "december" {
+		fmt.Printf("%q has 31 days.\n", args)
+	} else if m == "april" || m == "june" ||
+		m == "september" || m == "november" {
+		fmt.Printf("%q has 30 days.\n", args)
+	} else if m == "february" {
+		d := 28
+		if year%4 == 0 && (year%100 != 0 || year%400 == 0) {
+			d++
+		}
+		fmt.Printf("%q has %d days.\n", args, d)
+	} else {
+		fmt.Printf("%q is not a month.\n", args)
+	}
 }

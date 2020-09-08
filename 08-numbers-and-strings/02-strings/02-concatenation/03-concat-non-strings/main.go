@@ -38,7 +38,7 @@ func main() {
 	// Itoa = Integer to ASCII
 
 	fmt.Println(eq + strconv.Itoa(sum))
-
+	// fmt.Println(eq, sum)
 	//
 
 	// invalid op

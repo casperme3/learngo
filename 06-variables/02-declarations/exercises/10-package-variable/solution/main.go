@@ -8,7 +8,26 @@
 
 package main
 
-var isLiquid bool
+import "fmt"
+
+var atty int = 3
 
 func main() {
+	var attyw int = 2
+
+	_ = attyw
+
+	atty := 5
+	fmt.Println(atty)
+
+	atty += 3
+	fmt.Println(atty)
+
+	next()
+	fmt.Println("aft next:", atty)
+}
+
+func next() {
+	fmt.Println("next:", atty)
+	atty += 2
 }

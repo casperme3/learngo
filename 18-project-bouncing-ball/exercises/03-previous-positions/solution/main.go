@@ -22,7 +22,7 @@ func main() {
 		cellBall  = '⚾'
 
 		maxFrames = 1200
-		speed     = time.Second / 20
+		speed     = time.Second / 10
 
 		// initial velocities
 		ivx, ivy = 5, 2

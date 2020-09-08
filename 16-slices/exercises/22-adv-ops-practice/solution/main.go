@@ -107,6 +107,7 @@ func main() {
 	//
 	//
 	sliced := clone[1:4:4]
+	s.Show("6th: ", sliced)
 	sliced = append(sliced, "hypatia")
 	clone[2] = "elder"
 

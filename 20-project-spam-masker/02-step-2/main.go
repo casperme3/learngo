@@ -44,6 +44,8 @@ func main() {
 		in bool
 	)
 
+	fmt.Printf("len: %d\n", size)
+
 	for i := 0; i < size; i++ {
 		// slice the input and look for the link pattern
 		// do not slice it when it goes beyond the input text's capacity
@@ -55,7 +57,8 @@ func main() {
 			buf = append(buf, link...)
 
 			// jump to the next character after "http://"
-			i += nlink
+			i += nlink - 1
+			continue
 		}
 
 		// get the current byte from the input

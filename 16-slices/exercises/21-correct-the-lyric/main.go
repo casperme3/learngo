@@ -67,7 +67,19 @@ func main() {
 	// DON'T TOUCH THIS:
 	lyric := strings.Fields(`all my troubles seemed so far away oh i believe in yesterday now it looks as though they are here to stay`)
 
-	// ADD YOUR CODE BELOW:
-	// ...
+	lyric = append([]string{"Yesterday, "}, lyric...)
 	fmt.Printf("%s\n", lyric)
+	fmt.Printf("1) cap:%d\n", cap(lyric))
+
+	lyric = append(lyric, lyric[8:13]...)
+	fmt.Printf("%s\n", lyric)
+	fmt.Printf("2) cap:%d\n", cap(lyric))
+
+	lyric = append(lyric[:8], lyric[13:]...)
+	fmt.Printf("%s\n", lyric)
+	fmt.Printf("3) cap:%d\n", cap(lyric))
+
+	//You can reslice beyond its length to see the remaining data in there!!!
+	// lyric = lyric[:cap(lyric)]
+	// fmt.Printf("\n%s\n", lyric)
 }

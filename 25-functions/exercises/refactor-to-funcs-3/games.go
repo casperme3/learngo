@@ -8,29 +8,39 @@
 
 package main
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 const data = `
 [
         {
                 "id": 1,
-                "name": "god of war",
-                "genre": "action adventure",
-                "price": 50
+                "name": "war god",
+                "genre": "adventure",
+                "price": 5
         },
         {
                 "id": 2,
-                "name": "x-com 2",
+                "name": "comx 5",
                 "genre": "strategy",
-                "price": 40
+                "price": 11
         },
         {
                 "id": 3,
-                "name": "minecraft",
-                "genre": "sandbox",
-                "price": 20
+                "name": "craftedmind",
+                "genre": "sandb",
+                "price": 23
         }
 ]`
+
+type jsonGame struct {
+	ID    int    `json:"id"`
+	Name  string `json:"name"`
+	Genre string `json:"genre"`
+	Price int    `json:"price"`
+}
 
 type item struct {
 	id    int
@@ -43,11 +53,19 @@ type game struct {
 	genre string
 }
 
-func load() (games []game) {
-	games = addGame(games, newGame(1, 50, "god of war", "action adventure"))
-	games = addGame(games, newGame(2, 40, "x-com 2", "strategy"))
-	games = addGame(games, newGame(3, 20, "minecraft", "sandbox"))
-	return
+func load() (games []game, err error) {
+	var impt []jsonGame
+	if err = json.Unmarshal([]byte(data), &impt); err != nil {
+		fmt.Println("Error in  Unmarshal")
+		return games, err
+	}
+
+	//Store imported data to games slice
+	for _, g := range impt {
+		games = append(games, game{item{g.ID, g.Name, g.Price}, g.Genre})
+	}
+
+	return games, nil
 }
 
 func addGame(games []game, g game) []game {

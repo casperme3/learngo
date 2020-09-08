@@ -10,6 +10,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 
 	s "github.com/inancgumus/prettyslice"
 )
@@ -48,4 +49,18 @@ func main() {
 
 	// indexing returns a single element with the type of the indexed slice's element type
 	fmt.Printf("indexing: %T %[1]q\n", items[2])
+
+	{
+		fmt.Println(strings.Repeat("=", 20))
+		arr := [...]int{9, 7, 5, 3, 1}
+		nums := arr[2:] //5, 3, 1
+		// nums2 := nums[1:] //3, 1
+
+		// arr[2]++              // 6, 3, 1
+		// nums[1] -= arr[4] - 4 // 6, 6, 1
+		// nums2[1] += 5         // 6, 6, 6
+
+		fmt.Println(len(nums), cap(nums))
+
+	}
 }

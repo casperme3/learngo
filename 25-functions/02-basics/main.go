@@ -52,7 +52,7 @@ func main() {
 	local = sanitize(incrByStr(local, "2"))
 	show(local)
 
-	local = limit(incrBy(local, 5), 2000)
+	local = limit(incrBy(local, 5), 700)
 	show(local)
 }
 

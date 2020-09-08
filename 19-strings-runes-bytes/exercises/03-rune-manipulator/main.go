@@ -8,6 +8,12 @@
 
 package main
 
+import (
+	"fmt"
+	"strings"
+	"unicode/utf8"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Rune Manipulator
 //
@@ -18,7 +24,7 @@ package main
 // ---------------------------------------------------------
 
 func main() {
-	strings := []string{
+	words := []string{
 		"cool",
 		"güzel",
 		"jīntiān",
@@ -26,30 +32,63 @@ func main() {
 		"read 🤓",
 	}
 
-	_ = strings
-
-	// Print the byte and rune length of the strings
+	// Print the byte and rune length of the words
 	// Hint: Use len and utf8.RuneCountInString
 
-	// Print the bytes of the strings in hexadecimal
+	// Print the bytes of the words in hexadecimal
 	// Hint: Use % x verb
 
-	// Print the runes of the strings in hexadecimal
+	// Print the runes of the words in hexadecimal
 	// Hint: Use % x verb
 
-	// Print the runes of the strings as rune literals
+	// Print the runes of the words as rune literals
 	// Hint: Use for range
 
-	// Print the first rune and its byte size of the strings
+	// Print the first rune and its byte size of the words
 	// Hint: Use utf8.DecodeRuneInString
 
-	// Print the last rune of the strings
+	// Print the last rune of the words
 	// Hint: Use utf8.DecodeLastRuneInString
 
-	// Slice and print the first two runes of the strings
+	// Slice and print the first two runes of the words
 
-	// Slice and print the last two runes of the strings
+	// Slice and print the last two runes of the words
 
 	// Convert the string to []rune
 	// Print the first and last two runes
+
+	for _, str := range words {
+		strlen := len(str)
+		fmt.Printf("%q\n", str)
+		fmt.Printf("\tit has %d bytes and %d runes.\n", strlen, utf8.RuneCountInString(str))
+		fmt.Printf("\tbytes     : % x\n", []byte(str))
+		fmt.Printf("\trunes     :")
+		for _, r := range str {
+			fmt.Printf("% x", r)
+		}
+		fmt.Println()
+		fmt.Printf("\trunesl    :")
+		for _, r := range str {
+			fmt.Printf("%q", r)
+		}
+		fmt.Println()
+		r, s := utf8.DecodeRuneInString(str)
+		fmt.Printf("\tfirst     : %q (%d bytes)\n", r, s)
+
+		r, s = utf8.DecodeLastRuneInString(str)
+		fmt.Printf("\tlast      : %q (%d bytes)\n", r, s)
+
+		_, f1 := utf8.DecodeRuneInString(str)
+		_, f2 := utf8.DecodeRuneInString(str[f1:])
+		fmt.Printf("\tfirst2    : %q\n", str[:(f1+f2)])
+
+		_, l1 := utf8.DecodeLastRuneInString(str)
+		_, l2 := utf8.DecodeLastRuneInString(str[:strlen-l1])
+		fmt.Printf("\tlast2     : %q\n", str[strlen-l1-l2:])
+
+		fmt.Printf("\t%s\n", strings.Repeat("-", 30))
+		runes := []rune(str)
+		fmt.Printf("\tfirst2    : %q\n", string(runes[:2]))
+		fmt.Printf("\tlast2     : %q\n", string(runes[len(runes)-2:]))
+	}
 }

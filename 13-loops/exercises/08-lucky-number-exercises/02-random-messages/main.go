@@ -8,6 +8,14 @@
 
 package main
 
+import (
+	"fmt"
+	"math/rand"
+	"os"
+	"strconv"
+	"time"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Random Messages
 //
@@ -34,5 +42,63 @@ package main
 //    YOU LOST. TRY AGAIN?
 // ---------------------------------------------------------
 
+const (
+	maxTurns = 5
+	usage    = `This is a Lucky Number Game
+[Random Messages]
+
+Put your guess number and will see if you will win the game in %d tries.
+
+Let's Play!
+`
+)
+
 func main() {
+	rand.Seed(time.Now().UnixNano())
+
+	args := os.Args[1:]
+	if len(args) != 1 {
+		fmt.Printf(usage, maxTurns)
+		return
+	}
+
+	guess, err := strconv.Atoi(args[0])
+	if err != nil {
+		fmt.Println("Not a number. Try again.")
+		return
+	}
+
+	if guess < 0 {
+		fmt.Println("Give positive numbers only.")
+		return
+	}
+
+	for i := 0; i < maxTurns; i++ {
+		n := rand.Intn(guess + 1)
+		//fmt.Println(">", n)
+
+		if n != guess {
+			continue
+		}
+
+		switch rand.Intn(3) {
+		case 0:
+			fmt.Println("Great, you win!")
+		case 1:
+			fmt.Println("Awesome, you are lucky!")
+		case 2:
+			fmt.Println("You're are born a winner!")
+		}
+		return
+
+	}
+
+	switch rand.Intn(3) {
+	case 0:
+		fmt.Println("No chance. Try again!")
+	case 1:
+		fmt.Println("So sad you lost!")
+	case 2:
+		fmt.Println("You're a natural loser!")
+	}
 }

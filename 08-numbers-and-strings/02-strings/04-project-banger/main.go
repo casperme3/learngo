@@ -20,8 +20,7 @@ func main() {
 	msg := os.Args[1]
 	l := len(msg)
 
-	s := msg + strings.Repeat("!", l)
-	s = strings.ToUpper(s)
+	s := strings.ToUpper(msg) + strings.Repeat("!", l)
 
 	fmt.Println(s)
 }

@@ -8,6 +8,8 @@
 
 package main
 
+import "fmt"
+
 // ---------------------------------------------------------
 // EXERCISE: Swapper
 //
@@ -25,7 +27,11 @@ package main
 func main() {
 	// UNCOMMENT THE CODE BELOW:
 
-	// color, color2 := "red", "blue"
+	color, color2 := "red", "blue"
+	fmt.Println(color, color2)
+
+	color, color2 = color2, color
+	fmt.Println(color, color2)
 
 	// ?
 }

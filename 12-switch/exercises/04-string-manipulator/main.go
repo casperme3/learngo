@@ -8,6 +8,12 @@
 
 package main
 
+import (
+	"fmt"
+	"os"
+	"strings"
+)
+
 // ---------------------------------------------------------
 // STORY
 //  You want to write a program that will manipulate a
@@ -44,5 +50,25 @@ package main
 // ---------------------------------------------------------
 
 func main() {
+	args := os.Args
 
+	if len(args) != 3 {
+		fmt.Println(`[command] [string]
+Available commands: lower, upper and title
+		`)
+		return
+	}
+
+	cmd, str := args[1], args[2]
+
+	switch cmd {
+	case "lower":
+		fmt.Println(strings.ToLower(str))
+	case "upper":
+		fmt.Println(strings.ToUpper(str))
+	case "title":
+		fmt.Println(strings.Title(str))
+	default:
+		fmt.Printf("Unknown command: %q.\n", cmd)
+	}
 }

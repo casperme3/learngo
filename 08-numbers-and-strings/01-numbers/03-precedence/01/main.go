@@ -25,4 +25,9 @@ func main() {
 		(2+2)*4/2,
 		(2+2)*(4/2), // same as above
 	)
+
+	fmt.Println(
+		"\n",
+		2+3-18/2*3,
+	)
 }

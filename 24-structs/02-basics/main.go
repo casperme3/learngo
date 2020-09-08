@@ -24,7 +24,7 @@ func main() {
 	)
 
 	name, lastname, age = "Pablo", "Picasso", 95
-	name2, lastname2, age = "Sigmund", "Freud", 83
+	name2, lastname2, age2 = "Sigmund", "Freud", 83
 
 	fmt.Println("Picasso:", name, lastname, age)
 	fmt.Println("Freud  :", name2, lastname2, age2)

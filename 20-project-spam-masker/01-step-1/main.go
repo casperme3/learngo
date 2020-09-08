@@ -47,6 +47,7 @@ func main() {
 		// slice the input and look for the link pattern
 		// do not slice it when it goes beyond the input text's capacity
 		if len(text[i:]) >= nlink && text[i:i+nlink] == link {
+			fmt.Println("Link was found!")
 		}
 	}
 

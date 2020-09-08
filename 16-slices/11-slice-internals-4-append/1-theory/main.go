@@ -9,6 +9,8 @@
 package main
 
 import (
+	"fmt"
+
 	s "github.com/inancgumus/prettyslice"
 )
 
@@ -20,4 +22,12 @@ func main() {
 
 	ages = append(ages, 5)
 	s.Show("append(ages, 5)", ages)
+
+	{
+		words := []string{1022: ""}
+		fmt.Printf("%d-%d\n", len(words), cap(words))
+		words = append(words, "boom!")
+		fmt.Printf("%d-%d\n", len(words), cap(words))
+
+	}
 }

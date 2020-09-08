@@ -8,6 +8,12 @@
 
 package main
 
+import (
+	"fmt"
+	"os"
+	"sort"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Students
 //
@@ -73,4 +79,41 @@ func main() {
 	// slytherin    scorpius
 	// bobo         wizardry
 	// bobo         unwanted
+	house := map[string][]string{
+		"gryffindor": {"weasley", "hagrid", "dumbledore", "lupin"},
+		"hufflepuf":  {"wenlock", "scamander", "helga", "diggory"},
+		"ravenclaw":  {"flitwick", "bagnold", "wildsmith", "montmorency"},
+		"slytherin":  {"horace", "nigellus", "higgs", "scorpius"},
+		"bobo":       {"wizardry", "unwanted"},
+	}
+
+	delete(house, "bobo")
+	// fmt.Println(house)
+
+	args := os.Args[1:]
+	if len(args) != 1 {
+		fmt.Println("Input the house name.")
+		return
+	}
+
+	query := args[0]
+	names, ok := house[query]
+
+	if !ok {
+		fmt.Printf("I don't know about %q", query)
+		return
+	}
+
+	clone := append([]string(nil), names...)
+	sort.Strings(clone)
+
+	fmt.Printf("~~~ %q students original~~~\n", query)
+	for _, v := range names {
+		fmt.Printf("\t+%s\n", v)
+	}
+
+	fmt.Printf("~~~ %q students sorted~~~\n", query)
+	for _, v := range clone {
+		fmt.Printf("\t+%s\n", v)
+	}
 }

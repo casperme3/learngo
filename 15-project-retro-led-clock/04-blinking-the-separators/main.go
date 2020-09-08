@@ -15,124 +15,129 @@ import (
 	"github.com/inancgumus/screen"
 )
 
+type blocktype [5]string
+
+const (
+	sepa1 = iota + 2
+	_
+	_
+	sepa2
+)
+
 func main() {
-	type placeholder [5]string
-
-	zero := placeholder{
-		"███",
-		"█ █",
-		"█ █",
-		"█ █",
-		"███",
-	}
-
-	one := placeholder{
-		"██ ",
-		" █ ",
-		" █ ",
-		" █ ",
-		"███",
-	}
-
-	two := placeholder{
-		"███",
-		"  █",
-		"███",
-		"█  ",
-		"███",
-	}
-
-	three := placeholder{
-		"███",
-		"  █",
-		"███",
-		"  █",
-		"███",
-	}
-
-	four := placeholder{
-		"█ █",
-		"█ █",
-		"███",
-		"  █",
-		"  █",
-	}
-
-	five := placeholder{
-		"███",
-		"█  ",
-		"███",
-		"  █",
-		"███",
-	}
-
-	six := placeholder{
-		"███",
-		"█  ",
-		"███",
-		"█ █",
-		"███",
-	}
-
-	seven := placeholder{
-		"███",
-		"  █",
-		"  █",
-		"  █",
-		"  █",
-	}
-
-	eight := placeholder{
-		"███",
-		"█ █",
-		"███",
-		"█ █",
-		"███",
-	}
-
-	nine := placeholder{
-		"███",
-		"█ █",
-		"███",
-		"  █",
-		"███",
-	}
-
-	colon := placeholder{
+	tickOn := blocktype{
 		"   ",
 		" ░ ",
 		"   ",
 		" ░ ",
 		"   ",
 	}
-
-	digits := [...]placeholder{
-		zero, one, two, three, four, five, six, seven, eight, nine,
+	tickOff := blocktype{
+		"   ",
+		"   ",
+		"   ",
+		"   ",
+		"   ",
+	}
+	digits := [...]blocktype{
+		{
+			"███",
+			"█ █",
+			"█ █",
+			"█ █",
+			"███",
+		},
+		{
+			"██ ",
+			" █ ",
+			" █ ",
+			" █ ",
+			"███",
+		},
+		{
+			"███",
+			"  █",
+			"███",
+			"█  ",
+			"███",
+		},
+		{
+			"███",
+			"  █",
+			"███",
+			"  █",
+			"███",
+		},
+		{
+			"█ █",
+			"█ █",
+			"███",
+			"  █",
+			"  █",
+		},
+		{
+			"███",
+			"█  ",
+			"███",
+			"  █",
+			"███",
+		},
+		{
+			"███",
+			"█  ",
+			"███",
+			"█ █",
+			"███",
+		},
+		{
+			"███",
+			"  █",
+			"  █",
+			"  █",
+			"  █",
+		},
+		{
+			"███",
+			"█ █",
+			"███",
+			"█ █",
+			"███",
+		},
+		{
+			"███",
+			"█ █",
+			"███",
+			"  █",
+			"███",
+		},
 	}
 
 	screen.Clear()
-
+	//Infinite Loop: updates every 1 second
 	for {
 		screen.MoveTopLeft()
-
 		now := time.Now()
 		hour, min, sec := now.Hour(), now.Minute(), now.Second()
+		// fmt.Println(now)
 
-		clock := [...]placeholder{
+		clock := [...]blocktype{
 			digits[hour/10], digits[hour%10],
-			colon,
+			tickOn,
 			digits[min/10], digits[min%10],
-			colon,
+			tickOn,
 			digits[sec/10], digits[sec%10],
 		}
 
+		if (sec % 2) == 0 {
+			clock[sepa1], clock[sepa2] = tickOff, tickOff
+		}
+
 		for line := range clock[0] {
-			for digit := range clock {
-				fmt.Print(clock[digit][line], "  ")
+			for num := range clock {
+				fmt.Print(clock[num][line], "  ")
 			}
 			fmt.Println()
 		}
-
 		time.Sleep(time.Second)
 	}
 }

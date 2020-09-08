@@ -10,6 +10,8 @@ package main
 
 import (
 	"fmt"
+
+	s "github.com/inancgumus/prettyslice"
 )
 
 func main() {
@@ -30,7 +32,9 @@ func main() {
 	}
 
 	// create a drawing buffer
-	buf := make([]rune, 0, width*height)
+	buf := make([]rune, 0, width*height*2+height)
+	fmt.Printf("0) buf: %p - len(%d) - cap(%d)\n", buf, len(buf), cap(buf))
+	s.Show(">> init: ", buf)
 
 	// draw a smiley
 	board[12][2] = true
@@ -43,7 +47,7 @@ func main() {
 	board[16][7] = true
 
 	// use the loop for measuring the performance difference
-	for i := 0; i < 1000; i++ {
+	for i := 0; i < 10; i++ {
 		// rewind the buffer so that the program reuses it
 		buf = buf[:0]
 
@@ -60,8 +64,15 @@ func main() {
 			// fmt.Println()
 			buf = append(buf, '\n')
 		}
+		fmt.Printf("%02d) buf: %p - len(%d) - cap(%d)\n", i+1, buf, len(buf), cap(buf))
 
 		// print the buffer
-		fmt.Print(string(buf))
+		// fmt.Print(string(buf))
 	}
+	s.Show(">> after: ", buf)
+}
+
+func init() {
+	s.MaxPerLine = 30
+	s.Width = 50
 }

@@ -45,7 +45,7 @@ func main() {
 	}
 
 	// --- #4 ---
-	fmt.Println()
+	fmt.Println("--- #4 ---")
 
 	for n := range zero {
 		s := zero[:n]
@@ -53,7 +53,7 @@ func main() {
 	}
 
 	// --- #5 ---
-	fmt.Println()
+	fmt.Println("--- #5 ---")
 
 	zero = zero[:cap(zero)]
 	for n := range zero {
@@ -62,7 +62,7 @@ func main() {
 	}
 
 	// --- #6 ---
-	fmt.Println()
+	fmt.Println("--- #6 ---")
 
 	zero[0] = "command & conquer"
 	games[0] = "red alert"

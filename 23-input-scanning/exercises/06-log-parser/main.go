@@ -46,4 +46,5 @@ package main
 // ---------------------------------------------------------
 
 func main() {
+	//Done, my code is inside folder "03-project-log-parser"
 }

@@ -1,0 +1,11 @@
+mypath1/
+	path1_1
+	path1_2
+	path1_3
+
+mypath2/
+	path2_1
+	path2_2
+	path2_3
+	path2_4
+

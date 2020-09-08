@@ -8,6 +8,12 @@
 
 package main
 
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: List
 //
@@ -28,7 +34,44 @@ package main
 //  Please run the solution and try the program with list and
 //  quit commands.
 // ---------------------------------------------------------
+type item struct {
+	id    int
+	name  string
+	price int
+}
+
+type game struct {
+	item
+	genre string
+}
 
 func main() {
-	// use your solution from the previous exercise
+	games := []game{
+		{item: item{id: 1, name: "pubg", price: 20}, genre: "action"}, //complete with types
+		{item: item{3, "com2", 10}, genre: "stat"},                    //inner struct dont use types
+		{item{5, "ML", 20}, "moba"},                                   //shortcut no types at all
+		{item{6, "roblox", 5}, "sandbox"},
+	}
+
+	in := bufio.NewScanner(os.Stdin)
+	// in.Split(bufio.ScanWords)
+
+	fmt.Printf("Nolan's store have [%d] games.\n", len(games))
+
+	for {
+		fmt.Printf("\n  > list  : to list all games\n")
+		fmt.Printf("  > quit  : to quit program\n\n")
+
+		in.Scan()
+
+		switch cmd := in.Text(); cmd {
+		case "list":
+			for _, v := range games {
+				fmt.Printf("#%-4d %-10q %5d    %-15s\n", v.id, v.name, v.price, v.genre)
+			}
+		case "quit":
+			fmt.Println("\nProgram exited!")
+			return
+		}
+	}
 }

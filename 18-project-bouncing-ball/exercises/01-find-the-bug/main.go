@@ -41,6 +41,9 @@ import (
 //
 // ---------------------------------------------------------
 
+// NOTE: already fixed this issue in my source code at this location:
+// .../18-project-bouncing-ball/00-MyProj/main.go
+
 func main() {
 	const (
 		width  = 50

@@ -27,9 +27,9 @@ import "fmt"
 
 func main() {
 	const (
-		Nov = 11
-		Oct = 10
-		Sep = 9
+		Nov = 12 - (iota + 1)
+		Oct
+		Sep
 	)
 
 	fmt.Println(Sep, Oct, Nov)

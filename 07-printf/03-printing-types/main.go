@@ -18,9 +18,12 @@ func main() {
 		off   bool
 		brand string
 	)
+	true := "test"
 
 	fmt.Printf("%T\n", speed)
 	fmt.Printf("%T\n", heat)
 	fmt.Printf("%T\n", off)
 	fmt.Printf("%T\n", brand)
+
+	fmt.Printf("%s.", true)
 }

@@ -8,6 +8,11 @@
 
 package main
 
+import (
+	"fmt"
+	"strings"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Slice the numbers
 //
@@ -58,5 +63,18 @@ package main
 
 func main() {
 	// uncomment the declaration below
-	// data := "2 4 6 1 3 5"
+	data := "2 4 6 1 3 7"
+	nums := strings.Fields(data)
+	evens := nums[:3]
+	odds := nums[3:]
+
+	fmt.Printf("nums         : %s\n", nums)
+	fmt.Printf("evens        : %s\n", evens)
+	fmt.Printf("odds         : %s\n", odds)
+	fmt.Printf("middle       : %s\n", nums[2:4])
+	fmt.Printf("first2       : %s\n", nums[:2])
+	fmt.Printf("last2        : %s\n", nums[len(nums)-2:])
+	fmt.Printf("evens last 1 : %s\n", evens[2:])
+	fmt.Printf("odds last 2  : %s\n", odds[1:])
+
 }

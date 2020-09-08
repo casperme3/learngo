@@ -54,35 +54,42 @@ import (
 	"github.com/inancgumus/screen"
 )
 
+const (
+	sepa1 = iota + 2
+	_
+	_
+	sepa2
+)
+
 func main() {
 	screen.Clear()
-
+	//Infinite Loop: updates every 1 second
 	for {
 		screen.MoveTopLeft()
-
 		now := time.Now()
 		hour, min, sec := now.Hour(), now.Minute(), now.Second()
+		// fmt.Println(now)
 
-		clock := [...]placeholder{
+		clock := [...]blocktype{
 			digits[hour/10], digits[hour%10],
-			colon,
+			tickOn,
 			digits[min/10], digits[min%10],
-			colon,
+			tickOn,
 			digits[sec/10], digits[sec%10],
 		}
 
+		if sec%10 == 0 {
+			clock = alarm
+		} else if (sec % 2) == 0 {
+			clock[sepa1], clock[sepa2] = tickOff, tickOff
+		}
+
 		for line := range clock[0] {
-			for index, digit := range clock {
-				// colon blink
-				next := clock[index][line]
-				if digit == colon && sec%2 == 0 {
-					next = "   "
-				}
-				fmt.Print(next, "  ")
+			for num := range clock {
+				fmt.Print(clock[num][line], "  ")
 			}
 			fmt.Println()
 		}
-
 		time.Sleep(time.Second)
 	}
 }

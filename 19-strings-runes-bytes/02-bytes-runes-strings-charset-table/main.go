@@ -34,6 +34,10 @@ func main() {
 	for n := start; n <= stop; n++ {
 		fmt.Printf("%-10c %-10[1]d %-10[1]x % -12x\n", n, string(n))
 	}
+
+	ico := '⚾'
+
+	fmt.Printf("%q, len:%[1]d\n", ico)
 }
 
 /*

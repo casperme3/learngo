@@ -8,6 +8,12 @@
 
 package main
 
+import (
+	"fmt"
+	"os"
+	"strconv"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Find the Average
 //
@@ -40,4 +46,27 @@ package main
 // ---------------------------------------------------------
 
 func main() {
+	var (
+		total   int
+		numbers [5]float64
+		sum     float64
+	)
+
+	args := os.Args[1:]
+	l := len(args)
+	if l > 5 || l < 1 {
+		fmt.Println("Give me numbers, (max of 5 numbers)")
+		return
+	}
+
+	for i, v := range args {
+		if num, err := strconv.ParseFloat(v, 64); err == nil {
+			numbers[i] = num
+			sum += num
+			total++
+		}
+	}
+
+	fmt.Printf("Your numbers: %g\n", numbers)
+	fmt.Printf("Average: %g\n", sum/float64(total))
 }

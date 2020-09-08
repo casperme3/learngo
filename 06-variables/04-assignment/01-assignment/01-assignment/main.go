@@ -19,4 +19,9 @@ func main() {
 
 	speed = speed - 25
 	fmt.Println(speed)
+
+	rate := 10.5
+	inter := rate * 4
+
+	fmt.Printf("%T - %T\n", rate, inter)
 }

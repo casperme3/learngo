@@ -8,6 +8,8 @@
 
 package main
 
+import "fmt"
+
 // ---------------------------------------------------------
 // EXERCISE: Crunch the primes
 //
@@ -34,4 +36,8 @@ package main
 // ---------------------------------------------------------
 
 func main() {
+	temp := 5.
+
+	fmt.Printf("> %+v\n", temp)
+	fmt.Printf(">> %#v\n", temp)
 }

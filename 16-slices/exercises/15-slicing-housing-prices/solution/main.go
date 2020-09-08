@@ -10,7 +10,6 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"strings"
 )
 
@@ -33,7 +32,7 @@ Istanbul,500,10,5,1000000`
 	from, to := 0, len(cols)
 
 	// find the from and to positions depending on the command-line arguments
-	args := os.Args[1:]
+	args := strings.Split("Price Baths", " ")
 	for i, v := range cols {
 		l := len(args)
 
@@ -46,8 +45,9 @@ Istanbul,500,10,5,1000000`
 		}
 	}
 
+	// FIX
 	// from cannot be greater than to: reset invalid arg to 0
-	if from > to {
+	if from >= to {
 		from = 0
 	}
 

@@ -36,6 +36,13 @@ func main() {
 	// DO NOT CHANGE THE CODE BELOW
 	var counter int
 
+	counter++
+	counter--
+
+	counter += 5
+	counter *= 10
+	counter /= 5
+
 	// TYPE YOUR CODE HERE
 
 	// DO NOT CHANGE THE CODE BELOW

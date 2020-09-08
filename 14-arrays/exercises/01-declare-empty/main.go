@@ -8,6 +8,8 @@
 
 package main
 
+import "fmt"
+
 // ---------------------------------------------------------
 // EXERCISE: Declare empty arrays
 //
@@ -58,5 +60,43 @@ package main
 //  zero     : []
 // ---------------------------------------------------------
 
+const (
+	verb = `
+names	  : %#v
+distances : %#v
+data	  : %#v
+ratios	  : %#v
+alives	  : %#v
+zero	  : %#v`
+	verbType = `
+names	  : %T
+distances : %T
+data	  : %T
+ratios	  : %T
+alives	  : %T
+zero	  : %T`
+	verbEle = `
+names	  : %q
+distances : %d
+data	  : %d
+ratios	  : %.2f
+alives	  : %t
+zero	  : %d`
+)
+
 func main() {
+	var (
+		names     [3]string
+		distances [5]int
+		data      [5]byte
+		ratios    [1]float64
+		alives    [4]bool
+		zero      [0]uint8
+	)
+
+	fmt.Printf(verb, names, distances, data, ratios, alives, zero)
+	fmt.Println()
+	fmt.Printf(verbType, names, distances, data, ratios, alives, zero)
+	fmt.Println()
+	fmt.Printf(verbEle, names, distances, data, ratios, alives, zero)
 }

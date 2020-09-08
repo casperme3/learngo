@@ -100,84 +100,89 @@ import (
 
 func main() {
 	const (
-		width  = 50
-		height = 10
+		// width  = 50
+		// height = 10
+		// buflen = (width*2 + 1) * height //you could also use this len to allocate buf
 
 		cellEmpty = ' '
 		cellBall  = '⚾'
 
-		maxFrames = 1200
-		speed     = time.Second / 20
+		fps       = 20
+		speed     = time.Second / fps
+		maxFrames = 30 * fps //secs * fps
 
-		// drawing buffer length
-		//
-		// *2 for extra spaces
-		// +1 for newlines
-		bufLen = (width*2 + 1) * height
 	)
 
 	var (
-		px, py int    // ball position
-		vx, vy = 1, 1 // velocities
+		px, py int    //ball position
+		vx, vy = 1, 1 //velocities
 
-		cell rune // current cell (for caching)
+		cell rune
 	)
 
-	// create the board
-	board := make([][]bool, width)
-	for column := range board {
-		board[column] = make([]bool, height)
+	// width, height, err := terminal.GetSize(int(os.Stdout.Fd()))
+	// if err != nil {
+	// 	fmt.Println("ERROR: ", err)
+	// 	return
+	// }
+
+	width, height := screen.Size()
+	// fmt.Printf(">>> %d:%d\n", width, height)
+
+	board := make([][]bool, height)
+	for row := range board {
+		board[row] = make([]bool, width)
 	}
 
-	// create a drawing buffer
-	buf := make([]rune, 0, bufLen)
+	buflen := (width*2 + 1) * height
+	buf := make([]rune, 0, buflen) //or (width*2+1) * height
+	// fmt.Printf("00) buf[%p], len(%d), cap(%d)\n", buf, len(buf), cap(buf))
 
-	// clear the screen once
 	screen.Clear()
 
-	for i := 0; i < maxFrames; i++ {
-		// calculate the next ball position
+	for loop := 0; loop < maxFrames; loop++ {
+		// Clear 'buf' to be reused
+		buf = buf[:0]
+		//Resets the board to empty
+		for y := range board {
+			for x := range board[0] {
+				board[y][x] = false
+			}
+		}
+
 		px += vx
 		py += vy
 
-		// when the ball hits a border reverse its direction
-		if px <= 0 || px >= width-1 {
+		//Controls the direction of the ball either (+)right or (-)left
+		if px >= width-1 || px <= 0 {
 			vx *= -1
 		}
-		if py <= 0 || py >= height-1 {
+		//Controls the direction of the ball either (+)down or (-)up
+		if py >= height-1 || py <= 0 {
 			vy *= -1
 		}
 
-		// remove the previous ball
-		for y := range board[0] {
-			for x := range board {
-				board[x][y] = false
-			}
-		}
+		// fmt.Printf("[%d][%d]\n", px, py)
+		// Set the current location of the ball in the board
+		board[py][px] = true
 
-		// put the new ball
-		board[px][py] = true
-
-		// rewind the buffer (allow appending from the beginning)
-		buf = buf[:0]
-
-		// draw the board into the buffer
-		for y := range board[0] {
-			for x := range board {
+		//Drawing of the board and the ball
+		for y := range board {
+			for x := range board[0] {
 				cell = cellEmpty
-				if board[x][y] {
+				if board[y][x] {
 					cell = cellBall
 				}
+				// fmt.Print(string(cell) + " ")
 				buf = append(buf, cell, ' ')
 			}
+			// fmt.Println()
 			buf = append(buf, '\n')
 		}
-
-		// print the buffer
 		screen.MoveTopLeft()
 		fmt.Print(string(buf))
-
-		// slow down the animation
+		// fmt.Printf("%02d) buf[%p], len(%d), cap(%d)\n", loop+1, buf, len(buf), cap(buf))
 		time.Sleep(speed)
 	}
+	// fmt.Printf("ZZ) buf[%p], len(%d), cap(%d)\n", buf, len(buf), cap(buf))
 }

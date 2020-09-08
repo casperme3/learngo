@@ -16,3 +16,8 @@ func (m money) string() string {
 	// $xx.yy
 	return fmt.Sprintf("$%.2f", m)
 }
+
+func (m money) String() string { //Declaring as Stringer()
+	// $xx.yy
+	return fmt.Sprintf("$%.2f", m)
+}

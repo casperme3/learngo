@@ -20,9 +20,12 @@ func main() {
 
 	// you can attach methods to a compatible type on the fly:
 	// items -> []*game
+	// my = nil
+
+	// minecraft.discount(.5)
+
 	// list  -> []*game
 	my := list(items)
-	// my = nil
 
 	// you can call methods even on a nil value
 	my.print()

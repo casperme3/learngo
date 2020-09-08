@@ -21,33 +21,34 @@ type game struct {
 	genre string
 }
 
-func load() (games []game) {
-	games = addGame(games, newGame(1, 50, "god of war", "action adventure"))
-	games = addGame(games, newGame(2, 40, "x-com 2", "strategy"))
-	games = addGame(games, newGame(3, 20, "minecraft", "sandbox"))
-	return
+func newGame(id, price int, name, genre string) game {
+	return game{item{id, name, price}, genre}
 }
 
 func addGame(games []game, g game) []game {
 	return append(games, g)
 }
 
-func newGame(id, price int, name, genre string) game {
-	return game{
-		item:  item{id: id, name: name, price: price},
-		genre: genre,
-	}
+func load() (games []game) {
+	gow := newGame(1, 51, "god of wara", "action")
+	xxx := newGame(2, 42, "xxx-com3", "strategy")
+	mc := newGame(3, 33, "minedurcraft", "sandboxed")
+
+	games = addGame(games, gow)
+	games = addGame(games, xxx)
+	games = addGame(games, mc)
+
+	return
 }
 
-func indexByID(games []game) (byID map[int]game) {
-	byID = make(map[int]game)
+func indexByID(games []game) (toID map[int]game) {
+	toID = make(map[int]game)
 	for _, g := range games {
-		byID[g.id] = g
+		toID[g.id] = g
 	}
 	return
 }
 
 func printGame(g game) {
-	fmt.Printf("#%d: %-15q %-20s $%d\n",
-		g.id, g.name, "("+g.genre+")", g.price)
+	fmt.Printf("#%d: %-20q %-20s $%d\n", g.id, g.name, "[["+g.genre+"]]", g.price)
 }

@@ -9,6 +9,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"strconv"
 	"strings"
@@ -17,22 +18,23 @@ import (
 func runCmd(input string, games []game, byID map[int]game) bool {
 	fmt.Println()
 
+	b := true
 	cmd := strings.Fields(input)
 	if len(cmd) == 0 {
-		return true
+		return b
 	}
 
 	switch cmd[0] {
 	case "quit":
-		return cmdQuit()
-
+		b = cmdQuit()
 	case "list":
-		return cmdList(games)
-
+		b = cmdList(games)
 	case "id":
-		return cmdByID(cmd, games, byID)
+		b = cmdByID(cmd, games, byID)
+	case "save":
+		b = cmdSave(games)
 	}
-	return true
+	return b
 }
 
 func cmdQuit() bool {
@@ -68,4 +70,23 @@ func cmdByID(cmd []string, games []game, byID map[int]game) bool {
 	printGame(g)
 
 	return true
+}
+
+//        Name  : cmdSave
+//        Inputs: []game
+//        Output: bool
+func cmdSave(games []game) (b bool) {
+	var saved []jsonGame
+	for _, v := range games {
+		saved = append(saved, jsonGame{v.id, v.name, v.genre, v.price})
+	}
+
+	out, err := json.MarshalIndent(saved, "", "\t")
+	if err != nil {
+		fmt.Println(err)
+		return b
+	}
+
+	fmt.Println(string(out))
+	return b
 }

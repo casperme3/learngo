@@ -10,12 +10,23 @@ package main
 
 import "fmt"
 
+func joe() {
+	fmt.Println("Joey")
+}
+
 func main() {
 	fmt.Println("Hello!")
 
 	// two files belong to the same package
 	// calling `bye()` of bye.go here
 	bye()
+	hey()
+	joe()
+	jack()
+}
+
+func jack() {
+	fmt.Println("Jacko")
 }
 
 // EXERCISE: Remove the comments from the below function

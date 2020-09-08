@@ -20,7 +20,11 @@ func main() {
 	// conversion can be a destructive operation
 	// `force` loses its fractional part...
 
-	speed = speed * int(force)
+	speed = int(float64(speed) * force)
 
-	fmt.Println(speed)
+	area := 10.5
+	div := 2
+	fmt.Print(area / float64(div))
+
+	//fmt.Println(speed)
 }

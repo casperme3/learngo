@@ -51,8 +51,8 @@ func main() {
 	// all are the same rune
 
 	// beginning with go 1.13 you can type: 0b0110_1000 instead
-	// fmt.Printf("%q as binary: %08[1]b\n", 0b0110_1000)
 	fmt.Printf("%q in decimal: %[1]d\n", 104)
 	fmt.Printf("%q in binary : %08[1]b\n", 'h')
+	fmt.Printf("%q as binary: %08[1]b\n", 0b0110_1000)
 	fmt.Printf("%q in hex    : 0x%[1]x\n", 0x68)
 }

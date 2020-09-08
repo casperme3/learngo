@@ -8,6 +8,8 @@
 
 package main
 
+import "fmt"
+
 // ---------------------------------------------------------
 // EXERCISE: Warm-up
 //
@@ -30,17 +32,43 @@ func main() {
 	// #1
 	// Key        : Last name
 	// Element    : Phone number
+	phones := map[string]string{}
+	phones["nolan"] = "11111"
+	phones["saudia"] = "22222"
+	phones["ylan"] = "33333"
+	fmt.Printf("Phone directory: %q\n", phones)
 
 	// #2
 	// Key        : Product ID
 	// Element    : Available / Unavailable
+	products := map[int]bool{
+		123: true,
+		456: false,
+		789: true,
+		100: false,
+	}
+	fmt.Printf("Products available: %v\n", products)
 
 	// #3
 	// Key        : Last name
 	// Element    : Phone numbers
+	nphones := map[string][]string{
+		"nolan": {"111", "222", "333"},
+		"yan2x": {"444", "555"},
+		"ylan":  {"777"},
+	}
+	fmt.Printf("Phone numbers: %v\n", nphones)
 
 	// #4
 	// Key        : Customer ID
 	// Element Key:
 	//   Key: Product ID Element: Quantity
+	shop := map[int]map[int]int{
+		101: {90000: 5},
+		102: {90011: 15},
+		103: {90022: 25},
+		104: {90033: 35},
+	}
+	fmt.Printf("Shopping basket: %v\n", shop)
+
 }

@@ -32,7 +32,7 @@ func fetch() [][]int {
 25 10 45 60
 5 15 35
 95 10
-50 25`
+55 15`
 
 	lines := strings.Split(content, "\n")
 
@@ -41,11 +41,12 @@ func fetch() [][]int {
 	for i, line := range lines {
 		fields := strings.Fields(line)
 
-		spendings[i] = make([]int, len(fields))
+		spendings[i] = make([]int, 0, len(fields))
 
-		for j, field := range fields {
+		for _, field := range fields {
 			spending, _ := strconv.Atoi(field)
-			spendings[i][j] = spending
+			// spendings[i][j] = spending //or like this
+			spendings[i] = append(spendings[i], spending)
 		}
 	}
 

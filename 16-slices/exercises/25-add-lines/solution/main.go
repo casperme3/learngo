@@ -68,7 +68,7 @@ func main() {
 		//     n+next cutpoint (the next sentence).
 		//
 		n += copy(fix[n+i:], lyric[n:n+cutpoints[i]])
-
+		fmt.Println(">>", fix)
 		//
 		// add a newline after each sentence.
 		//

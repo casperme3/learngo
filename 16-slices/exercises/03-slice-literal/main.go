@@ -43,22 +43,23 @@ import "fmt"
 
 func main() {
 	var (
-		names     []string  // The names of your friends
-		distances []int     // The distances
-		data      []byte    // A data buffer
-		ratios    []float64 // Currency exchange ratios
-		alives    []bool    // Up/Down status of web servers
+		names     = []string{"nolan", "ylan", "yanyan"} // The names of your friends
+		distances = []int{20, 30, 50, 70, 100}          // The distances
+		data      = []byte{'Y', 'L', 'A', 'N', 'D'}     // A data buffer
+		ratios    = []float64{50.6, 70.2}               // Currency exchange ratios
+		alives    = []bool{true, true, false, false}    // Up/Down status of web servers
 	)
-
-	names = []string{}
-	distances = []int{}
-	data = []byte{}
-	ratios = []float64{}
-	alives = []bool{}
 
 	fmt.Printf("names    : %T %d %t\n", names, len(names), names == nil)
 	fmt.Printf("distances: %T %d %t\n", distances, len(distances), distances == nil)
 	fmt.Printf("data     : %T %d %t\n", data, len(data), data == nil)
 	fmt.Printf("ratios   : %T %d %t\n", ratios, len(ratios), ratios == nil)
 	fmt.Printf("alives   : %T %d %t\n", alives, len(alives), alives == nil)
+
+	var val string
+	if len(distances) != len(data) {
+		val = "not "
+	}
+
+	fmt.Printf("The length of distances and byte are %sthe same.", val)
 }

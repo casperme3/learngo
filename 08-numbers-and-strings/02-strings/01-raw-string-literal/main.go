@@ -16,8 +16,9 @@ func main() {
 	//
 	// So, they both can be used as a string value.
 	var s string
-	s = "how are you?"
-	s = `how are you?`
+	s = "how \nare you?"
+	fmt.Println(s)
+	s = `how \nare you?`
 	fmt.Println(s)
 
 	// string literal

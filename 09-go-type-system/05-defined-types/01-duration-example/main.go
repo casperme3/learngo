@@ -33,4 +33,25 @@ func main() {
 	// type of `h` and its underlying type are different
 	fmt.Printf("Type of h: %T\n", h)
 	fmt.Printf("Type of h's underlying type: %T\n", int64(h))
+
+	type myint int32
+	type urint float64
+
+	var x myint = 100
+	var y urint = 200
+
+	var a int32 = 25
+	var b float64 = 50
+
+	fmt.Println(":", x, y)
+
+	x += myint(a)
+	y += urint(b)
+
+	fmt.Println(x, y)
+
+	x += myint(b)
+	y += urint(a)
+
+	fmt.Println(x, y)
 }

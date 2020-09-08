@@ -13,13 +13,14 @@ func main() {
 	// just with different names
 	// for readability and refactoring
 	var (
-		// type byte = int8
+		// type byte = uint8
 		byteVal  byte
 		uint8Val uint8
 		intVal   int
 	)
 
 	uint8Val = byteVal // ok
+	byteVal = uint8Val
 
 	var (
 		// type rune = int32

@@ -13,6 +13,9 @@ import (
 	"io/ioutil"
 	"os"
 	"sort"
+	"strconv"
+
+	s "github.com/inancgumus/prettyslice"
 )
 
 // ---------------------------------------------------------
@@ -54,25 +57,45 @@ import (
 //
 //     Above code prints: hi !
 // ---------------------------------------------------------
-
 func main() {
-	items := os.Args[1:]
-	if len(items) == 0 {
-		fmt.Println("Send me some items and I will sort them")
+	args := os.Args[1:]
+	s.PrintBacking = true
+
+	if len(args) == 0 {
+		fmt.Println("Give me some items to sort.")
 		return
 	}
+	sort.Strings(args)
 
-	sort.Strings(items)
+	var total int
+	for _, arg := range args {
+		total += len(arg) + 4 //4 means the ordinal place and the newline
+	}
+	fmt.Printf("total: %d\n", total)
 
-	var data []byte
-	for _, s := range items {
-		data = append(data, s...)
-		data = append(data, '\n')
+	sorted := make([]byte, 0, total)
+	s.Show("init: ", sorted)
+
+	for i, arg := range args {
+		sorted = strconv.AppendInt(sorted, int64(i+1), 10)
+		sorted = append(sorted, '.', ' ')
+		sorted = append(sorted, arg...)
+		sorted = append(sorted, '\n')
 	}
 
-	err := ioutil.WriteFile("sorted.txt", data, 0644)
+	//TODO:
+	// why cant mix this: append(sorted, '.', ' ', arg...)
+	// Also check the address of the backing array before and after if it changes
+
+	err := ioutil.WriteFile("sorted2.txt", sorted, 0644)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println("ERROR: ", err)
 		return
 	}
+	s.Show("end: ", sorted)
+}
+
+func init() {
+	s.MaxPerLine = 10
+	s.Width = 45
 }

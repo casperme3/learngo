@@ -17,4 +17,5 @@ type book struct {
 
 func (b book) print() {
 	fmt.Printf("%-15s: %s\n", b.title, b.price.string())
+	// fmt.Printf("%-15s: %s\n", b.title, b.price) //if using as Stringer
 }

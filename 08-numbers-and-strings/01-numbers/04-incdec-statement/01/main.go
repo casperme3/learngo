@@ -19,6 +19,7 @@ func main() {
 
 	// BETTER:
 	n++
+	n++
 
 	fmt.Println(n)
 }

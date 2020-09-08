@@ -17,7 +17,8 @@ func main() {
 	// Itoa doesn't return any errors
 	// So, you don't have to handle the errors for it
 
-	s := strconv.Itoa(42)
+	s := strconv.Itoa(123)
 
 	fmt.Println(s)
+	fmt.Printf("Type: %T\n", s)
 }

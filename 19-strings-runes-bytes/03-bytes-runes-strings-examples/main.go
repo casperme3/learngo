@@ -15,6 +15,10 @@ import (
 )
 
 func main() {
+	mystr := "Nolan"
+	mystr = mystr[1:4]
+	fmt.Printf("%q\n", mystr)
+
 	str := "Yūgen ☯ 💀"
 
 	// can't change a string
@@ -58,6 +62,9 @@ func main() {
 
 	fmt.Printf("1st rune   : %c\n", runes[0])
 	fmt.Printf("2nd rune   : %c\n", runes[1])
+	fmt.Printf("7th rune   : %c\n", runes[6])
+	fmt.Printf("8th rune   : %c\n", runes[7])
+	fmt.Printf("9th rune   : %c\n", runes[8])
 	fmt.Printf("first five : %c\n", runes[:5])
 
 	fmt.Println()

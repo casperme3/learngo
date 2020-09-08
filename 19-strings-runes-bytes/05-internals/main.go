@@ -20,6 +20,9 @@ func main() {
 	hello := "hello"
 	dump(hello)
 	dump("hello")
+	dump("ello")
+	lo := hello[2:]
+	dump(lo)
 	dump("hello!")
 
 	for i := range hello {
@@ -29,6 +32,8 @@ func main() {
 	dump(string([]byte(hello)))
 	dump(string([]byte(hello)))
 	dump(string([]rune(hello)))
+
+	fmt.Printf("%c:\n", rune(65))
 }
 
 // StringHeader is used by a string value

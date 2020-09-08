@@ -13,8 +13,9 @@ import "fmt"
 func main() {
 	// constants repeat the previous type and expression
 	const (
-		min int = 1
-		max     // int = 1
+		min = 4
+		max //int = 2
+		miz
 	)
 
 	fmt.Println(min, max)

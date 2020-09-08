@@ -33,4 +33,6 @@ func main() {
 
 	fmt.Printf("There are %d words, %d of them are unique.\n",
 		total, len(words))
+
+	fmt.Printf("\n%v\n", words)
 }

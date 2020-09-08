@@ -12,5 +12,6 @@ import "fmt"
 
 func main() {
 	var firstName, lastName string = "", ""
-	fmt.Printf("%q %q\n", firstName, lastName)
+	//fmt.Printf("%q %q\n", firstName, lastName)
+	fmt.Println(firstName, lastName)
 }

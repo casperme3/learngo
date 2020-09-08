@@ -8,6 +8,14 @@
 
 package main
 
+import (
+	"fmt"
+	"math/rand"
+	"os"
+	"strconv"
+	"time"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Verbose Mode
 //
@@ -26,5 +34,55 @@ package main
 //  You need to get and interpret the command-line arguments.
 // ---------------------------------------------------------
 
+const (
+	maxTurns = 5
+	usage    = `This is a Lucky Number Game
+[Verbose Mode]
+
+Put your guess number and option mode, and will see if you will win the game in %d tries.
+[mode][guess number]
+Ex: -v 5
+
+Let's Play!
+`
+)
+
 func main() {
+	rand.Seed(time.Now().UnixNano())
+
+	args := os.Args[1:]
+	if len(args) != 2 {
+		fmt.Printf(usage, maxTurns)
+		return
+	}
+
+	guess, err := strconv.Atoi(args[1])
+	if err != nil {
+		fmt.Println("Put a valid number.")
+		return
+	}
+
+	if guess < 0 {
+		fmt.Println("Give positive numbers only.")
+		return
+	}
+
+	var verb bool
+	if args[0] == "-v" {
+		verb = true
+	}
+
+	// fmt.Println("guess: ", guess)
+	for i := 0; i < maxTurns; i++ {
+		n := rand.Intn(guess + 1)
+
+		if verb {
+			fmt.Printf("%d ", n)
+		}
+		if n == guess {
+			fmt.Printf(":: Great you win [%d]\n", n)
+			return
+		}
+	}
+	fmt.Println(":: Sorry you lost, again!")
 }

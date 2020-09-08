@@ -41,16 +41,21 @@ import (
 )
 
 func main() {
-	games := load()
-	byID := indexByID(games)
+	games, err := load()
+	if err != nil {
+		fmt.Printf("Error in loading games: %s\n", err)
+		return
+	}
 
+	byID := indexByID(games)
+	in := bufio.NewScanner(os.Stdin)
 	fmt.Printf("Inanc's game store has %d games.\n", len(games))
 
-	in := bufio.NewScanner(os.Stdin)
 	for {
 		fmt.Printf(`
   > list   : lists all the games
   > id N   : queries a game by id
+  > save   : export data in json format 
   > quit   : quits
 
 `)

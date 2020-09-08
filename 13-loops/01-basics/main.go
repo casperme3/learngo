@@ -26,4 +26,10 @@ func main() {
 	}
 
 	fmt.Println(sum)
+
+	var a int
+	for a < 5 {
+		a++
+		fmt.Println(a)
+	}
 }

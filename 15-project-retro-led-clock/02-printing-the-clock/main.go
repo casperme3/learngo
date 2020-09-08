@@ -10,98 +10,107 @@ package main
 
 import (
 	"fmt"
+	"time"
 )
 
+type blocktype [5]string
+
 func main() {
-	type placeholder [5]string
-
-	zero := placeholder{
-		"███",
-		"█ █",
-		"█ █",
-		"█ █",
-		"███",
+	separator := blocktype{
+		"   ",
+		" ░ ",
+		"   ",
+		" ░ ",
+		"   ",
+	}
+	digits := [...]blocktype{
+		{
+			"███",
+			"█ █",
+			"█ █",
+			"█ █",
+			"███",
+		},
+		{
+			"██ ",
+			" █ ",
+			" █ ",
+			" █ ",
+			"███",
+		},
+		{
+			"███",
+			"  █",
+			"███",
+			"█  ",
+			"███",
+		},
+		{
+			"███",
+			"  █",
+			"███",
+			"  █",
+			"███",
+		},
+		{
+			"█ █",
+			"█ █",
+			"███",
+			"  █",
+			"  █",
+		},
+		{
+			"███",
+			"█  ",
+			"███",
+			"  █",
+			"███",
+		},
+		{
+			"███",
+			"█  ",
+			"███",
+			"█ █",
+			"███",
+		},
+		{
+			"███",
+			"  █",
+			"  █",
+			"  █",
+			"  █",
+		},
+		{
+			"███",
+			"█ █",
+			"███",
+			"█ █",
+			"███",
+		},
+		{
+			"███",
+			"█ █",
+			"███",
+			"  █",
+			"███",
+		},
 	}
 
-	one := placeholder{
-		"██ ",
-		" █ ",
-		" █ ",
-		" █ ",
-		"███",
+	now := time.Now()
+	hour, min, sec := now.Hour(), now.Minute(), now.Second()
+	// fmt.Println(now)
+
+	clock := [...]blocktype{
+		digits[hour/10], digits[hour%10],
+		separator,
+		digits[min/10], digits[min%10],
+		separator,
+		digits[sec/10], digits[sec%10],
 	}
 
-	two := placeholder{
-		"███",
-		"  █",
-		"███",
-		"█  ",
-		"███",
-	}
-
-	three := placeholder{
-		"███",
-		"  █",
-		"███",
-		"  █",
-		"███",
-	}
-
-	four := placeholder{
-		"█ █",
-		"█ █",
-		"███",
-		"  █",
-		"  █",
-	}
-
-	five := placeholder{
-		"███",
-		"█  ",
-		"███",
-		"  █",
-		"███",
-	}
-
-	six := placeholder{
-		"███",
-		"█  ",
-		"███",
-		"█ █",
-		"███",
-	}
-
-	seven := placeholder{
-		"███",
-		"  █",
-		"  █",
-		"  █",
-		"  █",
-	}
-
-	eight := placeholder{
-		"███",
-		"█ █",
-		"███",
-		"█ █",
-		"███",
-	}
-
-	nine := placeholder{
-		"███",
-		"█ █",
-		"███",
-		"  █",
-		"███",
-	}
-
-	digits := [...]placeholder{
-		zero, one, two, three, four, five, six, seven, eight, nine,
-	}
-
-	for line := range digits[0] {
-		for digit := range digits {
-			fmt.Print(digits[digit][line], "  ")
+	for line := range clock[0] {
+		for num := range clock {
+			fmt.Print(clock[num][line], " ")
 		}
 		fmt.Println()
 	}

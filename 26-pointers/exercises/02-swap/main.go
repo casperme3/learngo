@@ -42,5 +42,41 @@
 
 package main
 
+import "fmt"
+
 func main() {
+	one, two := 1.11, 2.22
+	swapVal(&one, &two)
+	fmt.Printf("one:%g, two:%g\n", one, two)
+
+	p1, p2 := &one, &two
+	// p1, p2 = p2, p1
+	fmt.Printf(">> Bef: p1[%p], p2[%p]\n", p1, p2)
+	// swapAddr(p1, p2)
+	p1, p2 = swapAddr2(p1, p2)
+	// swapAddr(&p1, &p2) //for double pointer
+	fmt.Printf("======================\n")
+	fmt.Printf("Addr: one[%g], two[%g]\n", one, two)
+	fmt.Printf("Addr: p1[%p], p2[%p]\n", p1, p2)
+	fmt.Printf("Value: p1[%g], p2[%g]\n", *p1, *p2)
+}
+
+func swapVal(var1, var2 *float64) {
+	*var1, *var2 = *var2, *var1
+}
+
+//will only swap the value, not the address
+func swapVal2(var1, var2 *float64) {
+	// fmt.Printf(">> Aft: v1[%p], v2[%p]\n", var1, var2)
+	*var1, *var2 = *var2, *var1
+}
+
+//Double pointer is working... WOW!
+//This will swap the Address pointed by both pointer
+func swapAddr(var1, var2 **float64) {
+	*var1, *var2 = *var2, *var1
+}
+
+func swapAddr2(var1, var2 *float64) (*float64, *float64) {
+	return var2, var1
 }

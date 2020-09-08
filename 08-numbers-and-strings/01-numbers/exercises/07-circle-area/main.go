@@ -10,6 +10,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 )
 
 // ---------------------------------------------------------
@@ -42,9 +43,9 @@ func main() {
 		area   float64
 	)
 
-	// ADD YOUR CODE HERE
-	// ...
+	// area = math.Pi * radius * radius
+	area = math.Pi * math.Pow(radius, 2)
 
 	// DO NOT TOUCH THIS
-	fmt.Printf("radius: %g -> area: %g\n", radius, area)
+	fmt.Printf("NSI: radius: %g -> area: %.2f\n", radius, area)
 }

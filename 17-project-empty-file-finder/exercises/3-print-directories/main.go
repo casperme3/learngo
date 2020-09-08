@@ -8,6 +8,12 @@
 
 package main
 
+import (
+	"fmt"
+	"io/ioutil"
+	"os"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Find and write the names of subdirectories to a file
 //
@@ -68,4 +74,42 @@ package main
 // ---------------------------------------------------------
 
 func main() {
+	args := os.Args[1:]
+	if len(args) == 0 {
+		fmt.Println("Please provide directory paths.")
+		return
+	}
+
+	var ftree []byte
+	for _, arg := range args {
+		dirs, err := ioutil.ReadDir(arg)
+		if err != nil {
+			fmt.Println("ERROR: ", err)
+			continue
+		}
+		ftree = append(ftree, arg...)
+		ftree = append(ftree, '\n')
+		for _, dir := range dirs {
+			if dir.IsDir() { //TODO: try to search on 3rd to last subdirectory
+				ftree = append(ftree, '\t')
+				ftree = append(ftree, dir.Name()...)
+				ftree = append(ftree, '\n')
+			}
+		}
+		ftree = append(ftree, '\n')
+	}
+
+	err := ioutil.WriteFile("out.txt", ftree, 0644)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+}
+
+func readDir() { //Should use to return the subsequent directories
+	// dirs, err := ioutil.ReadDir(arg)
+	// if err != nil {
+	// 	fmt.Println("ERROR: ", err)
+	// 	continue
+	// }
 }

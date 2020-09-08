@@ -8,6 +8,12 @@
 
 package main
 
+import (
+	"fmt"
+	"os"
+	"strconv"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Currency Converter
 //
@@ -45,5 +51,41 @@ package main
 //     1.00 USD is 113.02 JPY
 // ---------------------------------------------------------
 
+const (
+	PHP = iota
+	JPY
+	SGD
+	GBP
+)
+
 func main() {
+	currency := [...]string{
+		PHP: "PHP",
+		JPY: "JPY",
+		GBP: "GBP",
+		SGD: "SGD",
+	}
+	conv := [...]float64{
+		PHP: 50.54,
+		GBP: .8,
+		SGD: 1.42,
+		JPY: 106.38,
+	}
+
+	args := os.Args[1:]
+
+	if len(args) != 1 {
+		fmt.Println("Please provide a value in dollar.")
+		return
+	}
+
+	val, err := strconv.ParseFloat(args[0], 64)
+	if err != nil {
+		fmt.Println("Not a value.")
+		return
+	}
+
+	for i, v := range conv {
+		fmt.Printf("%.2f USD is %.2f %s.\n", val, v*val, currency[i])
+	}
 }

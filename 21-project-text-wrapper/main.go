@@ -16,9 +16,11 @@ import (
 func main() {
 	const text = `Galaksinin Batı Sarmal Kolu'nun bir ucunda, haritası bile çıkarılmamış ücra bir köşede, gözlerden uzak, küçük ve sarı bir güneş vardır.
 
-Bu güneşin yörüngesinde, kabaca yüz kırksekiz milyon kilometre uzağında, tamamıyla önemsiz ve mavi-yeşil renkli, küçük bir gezegen döner.
+	Bu güneşin yörüngesinde, kabaca yüz kırksekiz milyon kilometre uzağında, tamamıyla önemsiz ve mavi-yeşil renkli, küçük bir gezegen döner.
 
-Gezegenin maymun soyundan gelen canlıları öyle ilkeldir ki dijital kol saatinin hâlâ çok etkileyici bir buluş olduğunu düşünürler.`
+	Gezegenin maymun soyundan gelen canlıları öyle ilkeldir ki dijital kol saatinin hâlâ çok etkileyici bir buluş olduğunu düşünürler.`
+
+	// const text = `this is just a test of wrapping a text. And thats it!`
 
 	const maxWidth = 40
 
@@ -29,6 +31,7 @@ Gezegenin maymun soyundan gelen canlıları öyle ilkeldir ki dijital kol saatin
 
 		switch lw++; {
 		case lw > maxWidth && r != '\n' && unicode.IsSpace(r):
+			fmt.Printf("[%d]", lw)
 			fmt.Println()
 			fallthrough
 		case r == '\n':

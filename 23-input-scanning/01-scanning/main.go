@@ -29,9 +29,9 @@ func main() {
 		lines++
 
 		// Get the current line from the scanner's buffer
-		// fmt.Println("Scanned Text :", in.Text())
+		fmt.Println("Scanned Text :", in.Text())
 		// fmt.Println("Scanned Bytes:", in.Bytes())
-		in.Text()
+		// in.Text()
 	}
 	fmt.Printf("There are %d line(s)\n", lines)
 

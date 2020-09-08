@@ -81,34 +81,75 @@ import (
 	"github.com/inancgumus/screen"
 )
 
-func main() {
-	screen.Clear()
+const (
+	sepa1 = iota + 2
+	_
+	_
+	sepa2
+	maxMove   = 8
+	maxSlider = 16
+)
 
+func main() {
+	// screen.Clear()
+	//Infinite Loop: updates every 1 second
+	var (
+		counter int
+	)
+
+	// maintask:
 	for {
+		screen.Clear()
 		screen.MoveTopLeft()
 
 		now := time.Now()
 		hour, min, sec := now.Hour(), now.Minute(), now.Second()
 
-		clock := [...]placeholder{
+		clock := [...]blocktype{
+			blank, blank, blank, blank,
+			blank, blank, blank, blank,
+		}
+
+		tmpClock := [...]blocktype{
 			digits[hour/10], digits[hour%10],
-			colon,
+			tickOn,
 			digits[min/10], digits[min%10],
-			colon,
+			tickOn,
 			digits[sec/10], digits[sec%10],
 		}
 
-		for line := range clock[0] {
-			for index, digit := range clock {
-				next := clock[index][line]
-				if digit == colon && sec%2 == 0 {
-					next = "   "
+		if (sec % 2) == 0 {
+			tmpClock[sepa1], tmpClock[sepa2] = blank, blank
+		}
+
+		clkLen := len(clock) - 1
+		slide := counter % maxSlider
+		moveI := slide % maxMove
+		// fmt.Printf("count: %d\n", )
+
+		switch {
+		case slide < maxMove: //0~7
+			for i := range clock {
+				if (i + moveI) >= maxMove {
+					break
 				}
-				fmt.Print(next, "  ")
+				clock[i] = tmpClock[i+slide]
+			}
+		case slide > maxMove: //9~16
+			for i := 0; i < moveI; i++ {
+				clock[clkLen-i] = tmpClock[moveI-1-i]
+			}
+		}
+
+		//Drawing of clock in the terminal
+		for line := range clock[0] {
+			for num := range clock {
+				fmt.Print(clock[num][line], "  ")
 			}
 			fmt.Println()
 		}
 
+		counter++
 		time.Sleep(time.Second)
 	}
 }

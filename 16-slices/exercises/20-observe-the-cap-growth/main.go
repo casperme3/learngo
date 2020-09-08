@@ -8,6 +8,8 @@
 
 package main
 
+import "fmt"
+
 // ---------------------------------------------------------
 // EXERCISE: Observe the capacity growth
 //
@@ -38,5 +40,23 @@ package main
 //  ... and so on.
 //
 // ---------------------------------------------------------
+const max = 1e7
 
-func main() {}
+func main() {
+	var (
+		slice    []int
+		capacity float64
+	)
+	// slice = append(slice, 1)
+	// fmt.Printf("%d:%d\n", slice, cap(slice))
+
+	for i := 0; i < max; i++ {
+		newcap := float64(cap(slice))
+		if newcap == 0 || capacity != newcap {
+			fmt.Printf("len:%-15d cap:%-15d growth:%-5.2f \n", len(slice), cap(slice), newcap/capacity)
+		}
+		capacity = newcap
+		slice = append(slice, i)
+	}
+	fmt.Printf("END\n")
+}

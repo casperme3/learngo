@@ -64,34 +64,14 @@ import (
 )
 
 func main() {
-	type item struct {
-		id    int
-		name  string
-		price int
-	}
-
-	type game struct {
-		item
-		genre string
-	}
-
 	// load()
-	games := []game{
-		{
-			item:  item{id: 1, name: "god of war", price: 50},
-			genre: "action adventure",
-		},
-		{item: item{id: 2, name: "x-com 2", price: 40}, genre: "strategy"},
-		{item: item{id: 3, name: "minecraft", price: 20}, genre: "sandbox"},
-	}
+	gamesList := load()
+	// fmt.Printf("main: %v\n", gamesList)
 
 	// indexByID()
-	byID := make(map[int]game)
-	for _, g := range games {
-		byID[g.id] = g
-	}
+	byID := indexByID(gamesList)
 
-	fmt.Printf("Inanc's game store has %d games.\n", len(games))
+	fmt.Printf("Inanc's game store has %d games.\n", len(gamesList))
 
 	in := bufio.NewScanner(os.Stdin)
 	for {
@@ -119,10 +99,10 @@ func main() {
 			return
 
 		case "list":
-			for _, g := range games {
+			fmt.Println("TESTSET")
+			for _, g := range gamesList {
 				// printGame()
-				fmt.Printf("#%d: %-15q %-20s $%d\n",
-					g.id, g.name, "("+g.genre+")", g.price)
+				printGame(g)
 			}
 
 		case "id":
@@ -144,8 +124,7 @@ func main() {
 			}
 
 			// printGame()
-			fmt.Printf("#%d: %-15q %-20s $%d\n",
-				g.id, g.name, "("+g.genre+")", g.price)
+			printGame(g)
 		}
 	}
 }
